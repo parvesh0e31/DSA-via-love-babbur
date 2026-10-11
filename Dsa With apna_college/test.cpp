@@ -1,61 +1,58 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
-class Node
-{
-public:
+class Node{
+    public:
+
     int data;
     Node *next;
+    Node(int value){
 
-    Node(int val)
-    {
-        data = val;
+        data = value;
         next = NULL;
+
     }
 };
 
-class List
-{
-private:
-    Node *head;
-    Node *tail;
+class list{
+    public:
+    Node *head = NULL;
+    Node *tail ;
 
-public:
-    List()
-    {
-        head = tail = NULL;
-    }
 
-    // FIXED: Removed the "ll." prefix from the function name
-    void push_front(int val)
-    {
-        Node *newNode = new Node(val);
+    void push_front(int value){
+
+        Node *newnode = new Node(value);
         if (head == NULL)
         {
-            head = tail = newNode;
-            return;
-        }
-        newNode->next = head;
-        head = newNode;
-    }
 
-    void PrintLl(){
+            head = newnode;
+            return ;
+        }
+        newnode->next = head;
+        head = newnode;
+
+    }
+    void printll(){
+
         Node *temp = head;
-        while (temp != NULL){
-            cout << temp->data << " "; // Added a space for cleaner output
+        while(temp!=NULL){
+
+            cout<<temp->data<<" -> ";
+
             temp = temp->next;
         }
-        cout << endl;
+        cout<<"NULL";
+
     }
 };
 
-int main()
-{
-    List ll;
-    ll.push_front(1);
+int main(){
+
+    list ll;
     ll.push_front(2);
     ll.push_front(3);
-    ll.PrintLl(); // Output will be: 3 2 1 
-
+    ll.push_front(4);
+    ll.printll();
     return 0;
 }
