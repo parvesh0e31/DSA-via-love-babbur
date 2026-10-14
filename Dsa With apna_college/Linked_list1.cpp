@@ -58,6 +58,53 @@ public:
         }
     }
 
+    void insertatmiddle(int value , int pos){
+
+        if (pos < 0){
+                return;
+            }
+
+            if (pos==0){
+                push_front(value);
+                return ;
+            }
+
+
+
+        Node *newnode = new Node (value);
+        Node *temp = head;
+
+        for(int i =0; i < pos-1;i++){
+            if(temp == NULL){
+                cout<<"Ivalid position to insert an element"<<endl;
+                return;
+            }
+            
+            temp = temp -> next ;
+
+        }
+
+         newnode->next = temp->next;
+         temp->next = newnode;
+    }
+
+    void search(int value){
+        int i = 0;
+        Node *temp = head;
+        while(temp!=NULL){
+            if(temp->data == value){
+
+                cout<<"\nfound the value at index : "<<i<<endl;
+                return ;
+            }
+            temp = temp->next;
+            i++;
+
+
+        }
+        cout<<"\nnot found the value in the ll";
+    }
+
     void PrintLl(){
 
         Node *temp = head;
@@ -78,7 +125,12 @@ int main()
     ll.push_front(2);
     ll.push_front(3);
     ll.PrintLl();
-    ll.pop_front();
+    cout<<"\n";
+    ll.insertatmiddle(5,8);
+    ll.PrintLl();
+    ll.search(2);
+
+    
     cout<<endl;
     ll.PrintLl();
 
