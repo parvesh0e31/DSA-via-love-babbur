@@ -105,6 +105,24 @@ public:
         cout<<"\nnot found the value in the ll";
     }
 
+    void reverselist(Node* head){
+
+        Node * prev = NULL;
+        Node * curr = head;
+        Node * next = NULL;
+        while(curr!=NULL){
+
+            next = curr->next;
+            curr->next=prev;
+            prev = curr;
+            curr = next ;
+
+        }
+
+        return prev;
+    
+    }
+
     void PrintLl(){
 
         Node *temp = head;
@@ -132,6 +150,8 @@ int main()
 
     
     cout<<endl;
+    ll.PrintLl();
+Node* newHead = ll.reverselist(ll.getHead());
     ll.PrintLl();
 
     return 0;
