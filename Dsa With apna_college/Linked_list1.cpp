@@ -52,6 +52,10 @@ public:
             Node *temp = head;
             head = head->next;
             temp ->next = NULL;
+
+            if (head == NULL) {
+                tail = NULL;
+            }
             
             delete temp;
 
@@ -69,14 +73,13 @@ public:
                 return ;
             }
 
-
-
         Node *newnode = new Node (value);
         Node *temp = head;
 
         for(int i =0; i < pos-1;i++){
             if(temp == NULL){
                 cout<<"Ivalid position to insert an element"<<endl;
+                delete newnode;
                 return;
             }
             
@@ -84,8 +87,17 @@ public:
 
         }
 
+        if (temp == NULL) {
+            cout<<"Ivalid position to insert an element"<<endl;
+            delete newnode;
+            return;
+        }
+
          newnode->next = temp->next;
          temp->next = newnode;
+         if (newnode->next == NULL) {
+             tail = newnode;
+         }
     }
 
     void search(int value){
@@ -105,10 +117,10 @@ public:
         cout<<"\nnot found the value in the ll";
     }
 
-    void reverselist(Node* head){
+    Node* reverselist(Node* start){
 
         Node * prev = NULL;
-        Node * curr = head;
+        Node * curr = start;
         Node * next = NULL;
         while(curr!=NULL){
 
@@ -119,8 +131,14 @@ public:
 
         }
 
+        tail = start;
+        head = prev;
         return prev;
     
+    }
+
+    Node* getHead(){
+        return head;
     }
 
     void PrintLl(){
@@ -129,7 +147,7 @@ public:
         while (temp!= NULL){
             cout<<temp->data << " -> ";
             temp = temp->next;
-
+                    
 
         }
         cout<<"NULL";
