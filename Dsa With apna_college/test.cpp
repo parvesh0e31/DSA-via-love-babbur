@@ -1,125 +1,40 @@
 #include<iostream>
+#include<set>
+#include<string>
+#include<algorithm>
+
 using namespace std;
 
-class Node{
-    public:
-
-    int data;
-    Node *next;
-    Node(int value){
-
-        data = value;
-        next = NULL;
-
-    }
-};
-
-class list{
-    public:
-    Node *head = NULL;
-    Node *tail = NULL ;
+int lengthoflongestsubstring(string s){
 
 
-    void push_front(int value){
+    int left = 0;
+    int maxlength = 0;
 
-        Node *newnode = new Node(value);
-        if (head == NULL)
-        {
+    set<char> st;
 
-            head = tail = newnode;
-            return ;
-        }
-        newnode->next = head;
-        head = newnode;
-
-    }
-    void push_back(int value){
-
-        Node *newnode = new Node(value);
-
-        if(head == NULL){
+    for (int right = 0; right < s.length();right++){
 
 
-        head = tail = newnode;
+        while(st.find(s[right]) != st.end()){
+
+            st.erase(s[left]);
+            left++;
         }
 
-        else
-        {
+        st.insert(s[right]);
+        int length = right-left+1;
+        maxlength = max(maxlength,length);}
 
-        tail ->next = newnode;
-        tail = newnode;
-        }
-    }
 
-    void pop_front(){
-
-    if(head == NULL){
-    cout<<"list is empty";}
-    else {
-
-    Node *temp;
-    temp = head;
-    
-    head = head -> next;
-    temp -> next = NULL;
-    delete temp;
-    }}
-
-    void pop_back(){
-
-    if (head == NULL){
-    cout<<"list is empty";
-return ;}
-if(head == tail){
-    delete head;
-    head = tail = NULL;
-    return ;
-}
-
-    Node *temp = head;
-
-    while(temp->next != tail){
-
-    temp = temp->next;
+        return maxlength;
 
     }
-
-delete tail;
-tail = temp;
-tail -> next = NULL;
-  }
-    
-    void printll(){
-
-        Node *temp = head;
-        while(temp!=NULL){
-
-            cout<<temp->data<<" -> ";
-
-            temp = temp->next;
-        }
-        cout<<"NULL";
-
+    int main(){
+        string s;
+        cout<<"enter string";
+        getline(cin,s);
+        int result = lengthoflongestsubstring(s);
+        cout<<"substring max is :"<<result<<endl;
+        return 0;
     }
-}
-;
-int main(){
-
-    
-   list ll;
-    ll.push_front(2);
-    ll.push_front(3);
-    ll.push_front(4);
-    ll.push_front(5);
-    ll.push_back(6);
-    ll.push_back(7);
-    ll.printll();
-    cout<<endl;
-
-
-ll.pop_front();
-    ll.pop_back();
-
-    ll.printll();
-    return 0;
-}
